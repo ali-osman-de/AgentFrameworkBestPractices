@@ -13,7 +13,7 @@ public class MultiChatService : IMultiChatService
     public MultiChatService(IAgentService agentService)
     {
         _agentService = agentService;
-        multiChatAgent = _agentService.CreateAgent(helloAgentOptions["model"], helloAgentOptions["instruction"], helloAgentOptions["name"], helloAgentOptions["description"], null);
+        multiChatAgent = _agentService.CreateAgent(helloAgentOptions["model"], helloAgentOptions["instruction"], helloAgentOptions["name"], helloAgentOptions["description"], null, null);
         thread = multiChatAgent.GetNewThread();
     }
 

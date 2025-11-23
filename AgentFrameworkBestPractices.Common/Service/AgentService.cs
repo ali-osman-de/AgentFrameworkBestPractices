@@ -14,17 +14,22 @@ public class AgentService : IAgentService
     {
         _configuration = configuration;
     }
-    public AIAgent CreateAgent(string model, string instructions, string name, string descriptions, List<AITool>? agentTools)
+    public AIAgent CreateAgent(string model, string instructions, string name, string descriptions, List<AITool>? agentTools, ChatResponseFormat? responseFormat)
     {
-    #pragma warning disable OPENAI001
+      
         var aiAgent = new OpenAIClient(_configuration["Agent:ApiKey"]).GetChatClient(model)
-                                              .CreateAIAgent(
-                                                  instructions: instructions,
-                                                  name: name,
-                                                  description: descriptions,
-                                                  tools: agentTools
-                                              );
-        #pragma warning disable OPENAI001
+                                                                      .CreateAIAgent(
+                                                                          new ChatClientAgentOptions(
+                                                                              instructions: instructions,
+                                                                              name: name,
+                                                                              description: descriptions,
+                                                                              tools: agentTools
+                                                                              )
+                                                                          //{ ChatOptions = new()
+                                                                          //{
+                                                                          //    ResponseFormat = responseFormat
+                                                                          //}}
+                                                                      );
 
         return aiAgent;
     }

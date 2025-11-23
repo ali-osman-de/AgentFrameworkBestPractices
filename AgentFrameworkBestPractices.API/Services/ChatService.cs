@@ -25,7 +25,7 @@ namespace AgentFrameworkBestPractices.API.Services
 
         public async Task<string> SendChatMessage(string message, CancellationToken cancellationToken)
         {
-            AIAgent chatAgent = _agentService.CreateAgent(helloAgentOptions["model"], helloAgentOptions["instruction"], helloAgentOptions["name"], helloAgentOptions["description"], null);
+            AIAgent chatAgent = _agentService.CreateAgent(helloAgentOptions["model"], helloAgentOptions["instruction"], helloAgentOptions["name"], helloAgentOptions["description"], null, null);
 
             AgentRunResponse agentResponse = await chatAgent.RunAsync(message);
 
