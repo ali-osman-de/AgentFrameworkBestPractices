@@ -1,5 +1,6 @@
 ﻿using AgentFrameworkBestPractices.Common.Interface;
 using Microsoft.Agents.AI;
+using Microsoft.Extensions.AI;
 using Microsoft.Extensions.Configuration;
 using OpenAI;
 
@@ -13,14 +14,15 @@ public class AgentService : IAgentService
     {
         _configuration = configuration;
     }
-    public AIAgent CreateAgent(string model, string instructions, string descriptions)
+    public AIAgent CreateAgent(string model, string instructions, string name, string descriptions, List<AITool>? agentTools)
     {
-        #pragma warning disable OPENAI001
-        var aiAgent = new OpenAIClient(_configuration["Agent:ApiKey"]).GetOpenAIResponseClient(model)
+    #pragma warning disable OPENAI001
+        var aiAgent = new OpenAIClient(_configuration["Agent:ApiKey"]).GetChatClient(model)
                                               .CreateAIAgent(
                                                   instructions: instructions,
-                                                  name: "deneme",
-                                                  description: descriptions
+                                                  name: name,
+                                                  description: descriptions,
+                                                  tools: agentTools
                                               );
         #pragma warning disable OPENAI001
 

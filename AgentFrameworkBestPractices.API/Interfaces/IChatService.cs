@@ -2,7 +2,6 @@
 {
     public interface IChatService
     {
-
         Task<string> SendChatMessage(string message, CancellationToken cancellationToken);
 
     }

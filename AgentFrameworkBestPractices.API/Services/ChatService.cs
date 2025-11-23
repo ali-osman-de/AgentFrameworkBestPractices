@@ -14,9 +14,18 @@ namespace AgentFrameworkBestPractices.API.Services
             _agentService = agentService;
         }
 
+        Dictionary<string, string> helloAgentOptions = new Dictionary<string, string>()
+        {
+            { "model", "gpt-4o" },
+            { "name", "HelloAgent" },
+            { "instruction", "You are greatful agent, someone come to you, you should say Merhabalar Efenim." },
+            { "description", "Your task is just welcoming in the instruction" }
+        };
+
+
         public async Task<string> SendChatMessage(string message, CancellationToken cancellationToken)
         {
-            AIAgent chatAgent = _agentService.CreateAgent("gpt-4o", "deneme versiyonu", "denemedir");
+            AIAgent chatAgent = _agentService.CreateAgent(helloAgentOptions["model"], helloAgentOptions["instruction"], helloAgentOptions["name"], helloAgentOptions["description"], null);
 
             AgentRunResponse agentResponse = await chatAgent.RunAsync(message);
 
