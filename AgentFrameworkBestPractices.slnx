@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="AgentFrameworkBestPractices.API/AgentFrameworkBestPractices.API.csproj" />
+  <Project Path="AgentFrameworkBestPractices.Common/AgentFrameworkBestPractices.Common.csproj" Id="2e696e96-311e-4a9e-bae1-a8cad518a6fd" />
+</Solution>

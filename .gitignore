@@ -9,6 +9,10 @@
 *.user
 *.userosscache
 *.sln.docstates
+*.appsettings.json
+*.appsettings_Development.json
+bin/
+obj/
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
@@ -360,4 +364,10 @@ MigrationBackup/
 .ionide/
 
 # Fody - auto-generated XML schema
+<<<<<<< HEAD
 FodyWeavers.xsd
+/AgentFrameworkBestPractices.API/appsettings.json
+/AgentFrameworkBestPractices.API/appsettings.Development.json
+=======
+FodyWeavers.xsd
+>>>>>>> ca87ea1 (Add .gitattributes and .gitignore.)
