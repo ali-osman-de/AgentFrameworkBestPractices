@@ -1,3 +1,4 @@
+using AgentFrameworkBestPractices.AgentAsFunctionTool.Extensions;
 using AgentFrameworkBestPractices.API.Extensions;
 using AgentFrameworkBestPractices.Common.Extensions;
 using AgentFrameworkBestPractices.FunctionCalling.Extensions;
@@ -12,6 +13,11 @@ builder.Services.AddCommonServiceExtensions(); // single olmasý lazým agent üret
 builder.Services.AddServiceExtensions(); // diðer servisler addscoped olabilir!!
 builder.Services.AddMultiConversationService();
 builder.Services.AddFunctionToolService();
+builder.Services.AddAsToolService();
+builder.Services.AddCors(opt =>
+{
+    opt.AddDefaultPolicy(x => x.AllowAnyHeader().AllowCredentials().AllowAnyOrigin());
+});
 
 var app = builder.Build();
 

@@ -1,3 +1,4 @@
+using AgentFrameworkBestPractices.AgentAsFunctionTool.Interfaces;
 using AgentFrameworkBestPractices.API.Interfaces;
 using AgentFrameworkBestPractices.Common.Interface;
 using AgentFrameworkBestPractices.FunctionCalling.Interfaces;
@@ -16,12 +17,14 @@ namespace AgentFrameworkBestPractices.API.Controllers
         private readonly IChatService _chatService;
         private readonly IMultiChatService _multiChatService;
         private readonly IFuncToolChatService _funcToolChatService;
+        private readonly IAgentAsToolService _agentAsToolService;
 
-        public ChatController(IChatService chatService, IMultiChatService multiChatService, IFuncToolChatService funcToolChatService)
+        public ChatController(IChatService chatService, IMultiChatService multiChatService, IFuncToolChatService funcToolChatService, IAgentAsToolService agentAsToolService)
         {
             _chatService = chatService;
             _multiChatService = multiChatService;
             _funcToolChatService = funcToolChatService;
+            _agentAsToolService = agentAsToolService;
         }
 
         [HttpPost]
@@ -41,6 +44,11 @@ namespace AgentFrameworkBestPractices.API.Controllers
         {
             var funcChat = await _funcToolChatService.ChatFuncTool(message);
             return Ok(funcChat);
+        }
+        public async Task<ActionResult> AgentAsFuncToolChat(string message)
+        {
+            var asFuncChat = await _agentAsToolService.AgentAsToolChat(message);
+            return Ok(asFuncChat);
         }
     }
 }

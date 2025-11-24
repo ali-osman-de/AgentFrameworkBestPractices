@@ -1,7 +1,9 @@
 <Solution>
+  <Project Path="AgentFrameworkBestPractices.AgentAsFunctionTool/AgentFrameworkBestPractices.AgentAsFunctionTool.csproj" Id="fe176176-2698-4b36-9ebb-8ffa041c7dd6" />
   <Project Path="AgentFrameworkBestPractices.API/AgentFrameworkBestPractices.API.csproj" />
   <Project Path="AgentFrameworkBestPractices.Common/AgentFrameworkBestPractices.Common.csproj" Id="2e696e96-311e-4a9e-bae1-a8cad518a6fd" />
   <Project Path="AgentFrameworkBestPractices.FunctionCalling/AgentFrameworkBestPractices.FunctionCalling.csproj" Id="32a853d5-b73d-47ff-85af-b32c5339c819" />
   <Project Path="AgentFrameworkBestPractices.MultiConversation/AgentFrameworkBestPractices.MultiConversation.csproj" Id="ae915568-b6f8-4ef1-a2c3-c78834b0e71b" />
+  <Project Path="AgentFrameworkBestPractices.Plugins/AgentFrameworkBestPractices.Plugins.csproj" Id="0f4af778-e4ed-4ed0-aac1-0e694aa3f7cf" />
   <Project Path="AgentFrameworkBestPractices.Prompt/AgentFrameworkBestPractices.Prompt.csproj" Id="136448cb-dd64-47ec-9465-a45bea2bf446" />
 </Solution>
