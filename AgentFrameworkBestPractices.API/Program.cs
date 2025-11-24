@@ -3,6 +3,7 @@ using AgentFrameworkBestPractices.API.Extensions;
 using AgentFrameworkBestPractices.Common.Extensions;
 using AgentFrameworkBestPractices.FunctionCalling.Extensions;
 using AgentFrameworkBestPractices.MultiConversation.Extensions;
+using AgentFrameworkBestPractices.Plugins.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +15,8 @@ builder.Services.AddServiceExtensions(); // diðer servisler addscoped olabilir!!
 builder.Services.AddMultiConversationService();
 builder.Services.AddFunctionToolService();
 builder.Services.AddAsToolService();
+builder.Services.AddPluginService();
+
 builder.Services.AddCors(opt =>
 {
     opt.AddDefaultPolicy(x => x.AllowAnyHeader().AllowCredentials().AllowAnyOrigin());

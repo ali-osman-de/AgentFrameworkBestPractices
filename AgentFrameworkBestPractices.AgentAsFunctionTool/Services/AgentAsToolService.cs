@@ -41,7 +41,6 @@ public class AgentAsToolService : IAgentAsToolService
                                                  WeatherAgentOptions["description"],
                                                  [weatherTool],
                                                  null);
-        Console.WriteLine("weather çalıştı", weatherAgent.Id);
 
         AIAgent mainAgent = _agentService.CreateAgent(MainAgentOptions["model"],
                                                       MainAgentOptions["instruction"],
@@ -49,10 +48,8 @@ public class AgentAsToolService : IAgentAsToolService
                                                       MainAgentOptions["description"],
                                                       [weatherAgent.AsAIFunction()],
                                                       null);
-        Console.WriteLine("main çalıştı", mainAgent.Id);
 
         AgentRunResponse response = await mainAgent.RunAsync(message);
-        Console.WriteLine(response.AgentId!, response.UserInputRequests, response.Messages);
 
         return response.Text;
     }

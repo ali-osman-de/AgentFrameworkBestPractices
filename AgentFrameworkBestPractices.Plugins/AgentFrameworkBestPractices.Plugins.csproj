@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AgentFrameworkBestPractices.Common\AgentFrameworkBestPractices.Common.csproj" />
+  </ItemGroup>
+
 </Project>
