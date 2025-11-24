@@ -19,11 +19,9 @@ public class FindProductByNameTool
 
         var json = await response.Content.ReadAsStringAsync();
 
-        var products = JsonSerializer.Deserialize<List<ProductInfo>>(
-            json,
-            new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+        var products = JsonSerializer.Deserialize<List<ProductInfo>>(json);
 
-        return products!;
+        return products;
 
     }
 }

@@ -23,15 +23,4 @@ public class ProductInfo
     [JsonPropertyName("image")]
     public string Image { get; set; }
 
-    [JsonPropertyName("rating")]
-    public RatingInfo Rating { get; set; }
-    public class RatingInfo
-    {
-        [JsonPropertyName("rate")]
-        public double Rate { get; set; }
-
-        [JsonPropertyName("count")]
-        public int Count { get; set; }
-    }
-
 }
