@@ -2,6 +2,7 @@ using AgentFrameworkBestPractices.AgentAsFunctionTool.Extensions;
 using AgentFrameworkBestPractices.API.Extensions;
 using AgentFrameworkBestPractices.Common.Extensions;
 using AgentFrameworkBestPractices.FunctionCalling.Extensions;
+using AgentFrameworkBestPractices.McpClientAsFunctionTool.Extensions;
 using AgentFrameworkBestPractices.MultiConversation.Extensions;
 using AgentFrameworkBestPractices.Plugins.Extensions;
 
@@ -16,6 +17,7 @@ builder.Services.AddMultiConversationService();
 builder.Services.AddFunctionToolService();
 builder.Services.AddAsToolService();
 builder.Services.AddPluginService();
+builder.Services.AddMcpClientAsTool();
 
 builder.Services.AddCors(opt =>
 {

@@ -2,6 +2,7 @@ using AgentFrameworkBestPractices.AgentAsFunctionTool.Interfaces;
 using AgentFrameworkBestPractices.API.Interfaces;
 using AgentFrameworkBestPractices.Common.Interface;
 using AgentFrameworkBestPractices.FunctionCalling.Interfaces;
+using AgentFrameworkBestPractices.McpClientAsFunctionTool.Interfaces;
 using AgentFrameworkBestPractices.MultiConversation.Interfaces;
 using AgentFrameworkBestPractices.Plugins.Interfaces;
 using Microsoft.Agents.AI;
@@ -20,14 +21,16 @@ namespace AgentFrameworkBestPractices.API.Controllers
         private readonly IFuncToolChatService _funcToolChatService;
         private readonly IAgentAsToolService _agentAsToolService;
         private readonly IPlugInChatService _plugInChatService;
+        private readonly IMcpAsFunctionService _mcpAsFunctionService;
 
-        public ChatController(IChatService chatService, IMultiChatService multiChatService, IFuncToolChatService funcToolChatService, IAgentAsToolService agentAsToolService, IPlugInChatService plugInChatService)
+        public ChatController(IChatService chatService, IMultiChatService multiChatService, IFuncToolChatService funcToolChatService, IAgentAsToolService agentAsToolService, IPlugInChatService plugInChatService, IMcpAsFunctionService mcpAsFunctionService)
         {
             _chatService = chatService;
             _multiChatService = multiChatService;
             _funcToolChatService = funcToolChatService;
             _agentAsToolService = agentAsToolService;
             _plugInChatService = plugInChatService;
+            _mcpAsFunctionService = mcpAsFunctionService;
         }
 
         [HttpPost]
@@ -57,6 +60,11 @@ namespace AgentFrameworkBestPractices.API.Controllers
         {
             var pluginsChat = await _plugInChatService.PlugInChat(message);
             return Ok(pluginsChat);
+        }
+        public async Task<ActionResult> McpAsToolChat(string message) 
+        {
+            var mcpAsToolChat = await _mcpAsFunctionService.McpAsFuncChat(message);
+            return Ok(mcpAsToolChat);
         }
     }
 }

@@ -16,6 +16,7 @@
     <ProjectReference Include="..\AgentFrameworkBestPractices.AgentAsFunctionTool\AgentFrameworkBestPractices.AgentAsFunctionTool.csproj" />
     <ProjectReference Include="..\AgentFrameworkBestPractices.Common\AgentFrameworkBestPractices.Common.csproj" />
     <ProjectReference Include="..\AgentFrameworkBestPractices.FunctionCalling\AgentFrameworkBestPractices.FunctionCalling.csproj" />
+    <ProjectReference Include="..\AgentFrameworkBestPractices.McpClientAsFunctionTool\AgentFrameworkBestPractices.McpClientAsFunctionTool.csproj" />
     <ProjectReference Include="..\AgentFrameworkBestPractices.MultiConversation\AgentFrameworkBestPractices.MultiConversation.csproj" />
     <ProjectReference Include="..\AgentFrameworkBestPractices.Plugins\AgentFrameworkBestPractices.Plugins.csproj" />
     <ProjectReference Include="..\AgentFrameworkBestPractices.Prompt\AgentFrameworkBestPractices.Prompt.csproj" />
