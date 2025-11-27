@@ -6,6 +6,7 @@ using AgentFrameworkBestPractices.FunctionCalling.Extensions;
 using AgentFrameworkBestPractices.McpClientAsFunctionTool.Extensions;
 using AgentFrameworkBestPractices.Plugins.Extensions;
 using AgentFrameworkBestPractices.MultiConversation.Extensions;
+using AgentFrameworkBestPractices.Workflows.Extensions;
 
 namespace AgentFrameworkBestPractices.API.Extensions;
 
@@ -21,5 +22,6 @@ public static class ServiceExtensions
         services.AddAsToolService();
         services.AddPluginService();
         services.AddMcpClientAsTool();
+        services.AddWorkflowService();
     }
 }

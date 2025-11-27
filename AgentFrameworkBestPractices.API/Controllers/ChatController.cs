@@ -5,6 +5,7 @@ using AgentFrameworkBestPractices.FunctionCalling.Interfaces;
 using AgentFrameworkBestPractices.McpClientAsFunctionTool.Interfaces;
 using AgentFrameworkBestPractices.MultiConversation.Interfaces;
 using AgentFrameworkBestPractices.Plugins.Interfaces;
+using AgentFrameworkBestPractices.Workflows.Interfaces;
 using Microsoft.Agents.AI;
 using Microsoft.AspNetCore.Mvc;
 using OpenAI;
@@ -22,8 +23,9 @@ namespace AgentFrameworkBestPractices.API.Controllers
         private readonly IAgentAsToolService _agentAsToolService;
         private readonly IPlugInChatService _plugInChatService;
         private readonly IMcpAsFunctionService _mcpAsFunctionService;
+        private readonly IWorkflowChatService _workflowChatService;
 
-        public ChatController(IChatService chatService, IMultiChatService multiChatService, IFuncToolChatService funcToolChatService, IAgentAsToolService agentAsToolService, IPlugInChatService plugInChatService, IMcpAsFunctionService mcpAsFunctionService)
+        public ChatController(IChatService chatService, IMultiChatService multiChatService, IFuncToolChatService funcToolChatService, IAgentAsToolService agentAsToolService, IPlugInChatService plugInChatService, IMcpAsFunctionService mcpAsFunctionService, IWorkflowChatService workflowChatService)
         {
             _chatService = chatService;
             _multiChatService = multiChatService;
@@ -31,6 +33,7 @@ namespace AgentFrameworkBestPractices.API.Controllers
             _agentAsToolService = agentAsToolService;
             _plugInChatService = plugInChatService;
             _mcpAsFunctionService = mcpAsFunctionService;
+            _workflowChatService = workflowChatService;
         }
 
         [HttpPost]
@@ -65,6 +68,11 @@ namespace AgentFrameworkBestPractices.API.Controllers
         {
             var mcpAsToolChat = await _mcpAsFunctionService.McpAsFuncChat(message);
             return Ok(mcpAsToolChat);
+        }
+        public async Task<ActionResult> ConcurrentWorkflowChat(string message) 
+        {
+            var WorkflowChat = await _workflowChatService.ConcurrentWorkflowChat(message);
+            return Ok(WorkflowChat);
         }
     }
 }

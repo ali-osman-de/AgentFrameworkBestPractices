@@ -7,4 +7,5 @@
   <Project Path="AgentFrameworkBestPractices.MultiConversation/AgentFrameworkBestPractices.MultiConversation.csproj" Id="ae915568-b6f8-4ef1-a2c3-c78834b0e71b" />
   <Project Path="AgentFrameworkBestPractices.Plugins/AgentFrameworkBestPractices.Plugins.csproj" Id="0f4af778-e4ed-4ed0-aac1-0e694aa3f7cf" />
   <Project Path="AgentFrameworkBestPractices.Prompt/AgentFrameworkBestPractices.Prompt.csproj" Id="136448cb-dd64-47ec-9465-a45bea2bf446" />
+  <Project Path="AgentFrameworkBestPractices.Workflows/AgentFrameworkBestPractices.Workflows.csproj" Id="aebe1fb5-6f8b-48c5-9257-86b47eba5a17" />
 </Solution>

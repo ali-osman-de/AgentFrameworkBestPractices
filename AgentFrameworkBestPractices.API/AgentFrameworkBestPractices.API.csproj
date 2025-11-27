@@ -7,8 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Agents.AI" Version="1.0.0-preview.251114.1" />
-    <PackageReference Include="Microsoft.Agents.AI.OpenAI" Version="1.0.0-preview.251114.1" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.0" />
   </ItemGroup>
 
@@ -20,6 +18,7 @@
     <ProjectReference Include="..\AgentFrameworkBestPractices.MultiConversation\AgentFrameworkBestPractices.MultiConversation.csproj" />
     <ProjectReference Include="..\AgentFrameworkBestPractices.Plugins\AgentFrameworkBestPractices.Plugins.csproj" />
     <ProjectReference Include="..\AgentFrameworkBestPractices.Prompt\AgentFrameworkBestPractices.Prompt.csproj" />
+    <ProjectReference Include="..\AgentFrameworkBestPractices.Workflows\AgentFrameworkBestPractices.Workflows.csproj" />
   </ItemGroup>
 
 </Project>
