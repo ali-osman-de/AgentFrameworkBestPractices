@@ -7,12 +7,15 @@ using AgentFrameworkBestPractices.McpClientAsFunctionTool.Extensions;
 using AgentFrameworkBestPractices.Plugins.Extensions;
 using AgentFrameworkBestPractices.MultiConversation.Extensions;
 using AgentFrameworkBestPractices.Workflows.Extensions;
+using AgentFrameworkBestPractices.Projects.ToDoManagerApp.Extensions;
+using AgentFrameworkBestPractices.Projects.ToDoManagerApp.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace AgentFrameworkBestPractices.API.Extensions;
 
 public static class ServiceExtensions
 {
-    public static void AddServiceExtensions(this IServiceCollection services){
+    public static void AddServiceExtensions(this IServiceCollection services, IConfiguration configuration){
 
         services.AddScoped<IChatService, ChatService>();
         services.AddCommonServiceExtensions(); // single olması lazım agent üretimi
@@ -23,5 +26,6 @@ public static class ServiceExtensions
         services.AddPluginService();
         services.AddMcpClientAsTool();
         services.AddWorkflowService();
+        services.AddToDoServiceExtension(configuration);
     }
 }
