@@ -10,6 +10,6 @@ public class AppDbContext : DbContext
     {
     }
 
-    public DbSet<ToDo> ToDos { get; set; } = null!;
+    public DbSet<ToDo> ToDos { get; set; }
 
 }

@@ -2,30 +2,22 @@ using System;
 using System.ComponentModel;
 using AgentFrameworkBestPractices.Projects.ToDoManagerApp.Data;
 using AgentFrameworkBestPractices.Projects.ToDoManagerApp.Model;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace AgentFrameworkBestPractices.Projects.ToDoManagerApp.Tools;
 
 public class ToDoManagerTool
 {
-    private static IServiceScopeFactory? _scopeFactory;
+    private readonly AppDbContext _context;
 
-    public static void Configure(IServiceScopeFactory scopeFactory)
+    public ToDoManagerTool(AppDbContext context)
     {
-        _scopeFactory = scopeFactory;
-    }
-
-    private static async Task<T> WithService<T>(Func<DatabaseService, Task<T>> action)
-    {
-        if (_scopeFactory == null)
-            throw new InvalidOperationException("ScopeFactory has not been configured.");
-        using var scope = _scopeFactory.CreateScope();
-        var service = scope.ServiceProvider.GetRequiredService<DatabaseService>();
-        return await action(service);
+        _context = context;
     }
 
     [Description("Add new To-Do in the database")]
-    public static async Task<bool> AddNewToDo([Description("To-Do name")]string toDoName, [Description("To-Do description")] string toDoDescription)
+    public async Task<bool> AddNewToDo([Description("To-Do name")]string toDoName, [Description("To-Do description")] string toDoDescription)
     {
         var newToDo = new ToDo
         {
@@ -34,29 +26,43 @@ public class ToDoManagerTool
             Description = toDoDescription
         };
 
-        var result = await WithService(service => service.AddToDo(newToDo));
+        _context.ToDos.Add(newToDo);
+        var result = await _context.SaveChangesAsync() > 0;
         return result ? true : false;
-
     }
 
     [Description("List all To-Do in the database")]
-    public static async Task<List<ToDo>> ListToDo()
+    public async Task<List<ToDo>> ListToDo()
     {
-        var result = await WithService(service => service.ListTodo());
+        var result = await _context.ToDos.ToListAsync();
         return result;
     }
 
     [Description("Update To-Do in the database")]
-    public static async Task<ToDo> UpdateToDo([Description("To-Do kimlik numarası")]Guid Id, [Description("updated To-Do name")]string toDoName, [Description("updated To-Do description")] string toDoDescription)
+    public async Task<ToDo> UpdateToDo([Description("To-Do kimlik numarası")]Guid Id, [Description("updated To-Do name")]string toDoName, [Description("updated To-Do description")] string toDoDescription)
     {
-        var result = await WithService(service => service.UpdateToDo(Id, toDoName, toDoDescription));
-        return result;
+        var entity = await _context.ToDos.FindAsync(Id);
+        if (entity == null)
+        {
+            throw new InvalidOperationException($"To-Do item with Id '{Id}' not found.");
+        }
+        entity.Title = toDoName;
+        entity.Description = toDoDescription;
+        _context.ToDos.Update(entity);
+        await _context.SaveChangesAsync();
+        return entity;
     }
 
     [Description("Remove To-Do in the database")]
-    public static async Task<bool> RemoveToDo([Description("To-Do kimlik numarası")]Guid Id)
+    public async Task<bool> RemoveToDo([Description("To-Do kimlik numarası")]Guid Id)
     {
-        var result = await WithService(service => service.RemoveTodo(Id));
+        var entity = await _context.ToDos.FindAsync(Id);
+        if (entity == null)
+        {
+            return false;
+        }
+        _context.ToDos.Remove(entity);
+        var result = await _context.SaveChangesAsync() > 0;
         return result ? true : false;
     }
 }

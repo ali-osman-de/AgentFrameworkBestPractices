@@ -11,6 +11,7 @@ namespace AgentFrameworkBestPractices.Projects.ToDoManagerApp.Services;
 public class ToDoService : IToDoService
 {
     private readonly IAgentService _agentService;
+    private readonly ToDoManagerTool _toDoManagerTool;
     Dictionary<string, string> ToDoAgentOptions = new Dictionary<string, string>()
     {
         { "model", "gpt-4o" },
@@ -19,18 +20,18 @@ public class ToDoService : IToDoService
         { "description", "Your task is do something about the input with tools." }
     };
 
-    public ToDoService(IAgentService agentService, IServiceScopeFactory scopeFactory)
+    public ToDoService(IAgentService agentService, ToDoManagerTool toDoManagerTool)
     {
         _agentService = agentService;
-        ToDoManagerTool.Configure(scopeFactory);
+        _toDoManagerTool = toDoManagerTool;
     }
 
     public async Task<string> ToDoChat(string message)
     {
-        List<AITool> toDoAgentTools = [ AIFunctionFactory.Create(ToDoManagerTool.AddNewToDo),
-                                        AIFunctionFactory.Create(ToDoManagerTool.ListToDo),
-                                        AIFunctionFactory.Create(ToDoManagerTool.RemoveToDo),
-                                        AIFunctionFactory.Create(ToDoManagerTool.UpdateToDo) ];
+        List<AITool> toDoAgentTools = [ AIFunctionFactory.Create(_toDoManagerTool.AddNewToDo),
+                                        AIFunctionFactory.Create(_toDoManagerTool.ListToDo),
+                                        AIFunctionFactory.Create(_toDoManagerTool.RemoveToDo),
+                                        AIFunctionFactory.Create(_toDoManagerTool.UpdateToDo) ];
 
         // AgentRunOptions toDoAgentRunOptions = new ChatClientAgentRunOptions()
         // {

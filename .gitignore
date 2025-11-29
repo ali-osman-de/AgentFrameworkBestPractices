@@ -13,6 +13,9 @@
 *.appsettings_Development.json
 bin/
 obj/
+**AppDbContextFactory.cs
+**toDoApp.db-shm
+**toDoApp.db-wal
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
@@ -371,3 +374,6 @@ FodyWeavers.xsd
 =======
 FodyWeavers.xsd
 >>>>>>> ca87ea1 (Add .gitattributes and .gitignore.)
+AgentFrameworkBestPractices.Projects/Migrations/20251129190927_mig_1.cs
+AgentFrameworkBestPractices.Projects/Migrations/20251129190927_mig_1.Designer.cs
+AgentFrameworkBestPractices.Projects/toDoApp.db
