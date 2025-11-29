@@ -4,7 +4,6 @@ using AgentFrameworkBestPractices.FunctionCalling.Interfaces;
 using AgentFrameworkBestPractices.McpClientAsFunctionTool.Interfaces;
 using AgentFrameworkBestPractices.MultiConversation.Interfaces;
 using AgentFrameworkBestPractices.Plugins.Interfaces;
-using AgentFrameworkBestPractices.Projects.ToDoManagerApp.Interfaces;
 using AgentFrameworkBestPractices.Workflows.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,9 +20,8 @@ namespace AgentFrameworkBestPractices.API.Controllers
         private readonly IPlugInChatService _plugInChatService;
         private readonly IMcpAsFunctionService _mcpAsFunctionService;
         private readonly IWorkflowChatService _workflowChatService;
-        private readonly IToDoService _toDoService;
 
-        public ChatController(IChatService chatService, IMultiChatService multiChatService, IFuncToolChatService funcToolChatService, IAgentAsToolService agentAsToolService, IPlugInChatService plugInChatService, IMcpAsFunctionService mcpAsFunctionService, IWorkflowChatService workflowChatService, IToDoService toDoService)
+        public ChatController(IChatService chatService, IMultiChatService multiChatService, IFuncToolChatService funcToolChatService, IAgentAsToolService agentAsToolService, IPlugInChatService plugInChatService, IMcpAsFunctionService mcpAsFunctionService, IWorkflowChatService workflowChatService)
         {
             _chatService = chatService;
             _multiChatService = multiChatService;
@@ -32,7 +30,6 @@ namespace AgentFrameworkBestPractices.API.Controllers
             _plugInChatService = plugInChatService;
             _mcpAsFunctionService = mcpAsFunctionService;
             _workflowChatService = workflowChatService;
-            _toDoService = toDoService;
         }
 
         [HttpPost]
@@ -72,11 +69,6 @@ namespace AgentFrameworkBestPractices.API.Controllers
         {
             var WorkflowChat = await _workflowChatService.ConcurrentWorkflowChat(message);
             return Ok(WorkflowChat);
-        }
-        public async Task<IActionResult> ToDoChat(string message)
-        {
-           var result = await _toDoService.ToDoChat(message);
-           return Ok(result);
         }
     }
 }

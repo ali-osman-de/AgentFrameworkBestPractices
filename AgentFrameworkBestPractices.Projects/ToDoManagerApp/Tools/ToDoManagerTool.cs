@@ -1,9 +1,7 @@
-using System;
 using System.ComponentModel;
 using AgentFrameworkBestPractices.Projects.ToDoManagerApp.Data;
 using AgentFrameworkBestPractices.Projects.ToDoManagerApp.Model;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace AgentFrameworkBestPractices.Projects.ToDoManagerApp.Tools;
 
@@ -56,11 +54,7 @@ public class ToDoManagerTool
     [Description("Remove To-Do in the database")]
     public async Task<bool> RemoveToDo([Description("To-Do kimlik numarası")]Guid Id)
     {
-        var entity = await _context.ToDos.FindAsync(Id);
-        if (entity == null)
-        {
-            return false;
-        }
+        var entity = _context.ToDos.Find(Id);
         _context.ToDos.Remove(entity);
         var result = await _context.SaveChangesAsync() > 0;
         return result ? true : false;
