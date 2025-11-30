@@ -44,7 +44,7 @@ public class FuncToolChatService : IFuncToolChatService
                 ResponseFormat = ChatResponseFormat.ForJsonSchema<Response>(schemaDescription: "A lot of type in response model")
             }
         };
-
+        
         AgentRunResponse agentRunResponse = await functionalAgent.RunAsync(message, options: productRunOptions);
 
         return agentRunResponse.Text;

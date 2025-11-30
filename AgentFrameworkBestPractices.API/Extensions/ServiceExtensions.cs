@@ -10,6 +10,7 @@ using AgentFrameworkBestPractices.Workflows.Extensions;
 using AgentFrameworkBestPractices.Projects.ToDoManagerApp.Extensions;
 using AgentFrameworkBestPractices.Projects.ToDoManagerApp.Data;
 using Microsoft.EntityFrameworkCore;
+using AgentFrameworkBestPractices.RAG.Extensions;
 
 namespace AgentFrameworkBestPractices.API.Extensions;
 
@@ -27,5 +28,6 @@ public static class ServiceExtensions
         services.AddMcpClientAsTool();
         services.AddWorkflowService();
         services.AddToDoServiceExtension(configuration);
+        services.AddRagServiceExtensions();
     }
 }
