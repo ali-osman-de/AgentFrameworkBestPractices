@@ -64,6 +64,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="../AgentFrameworkBestPractices.A2A/AgentFrameworkBestPractices.A2A.csproj" />
     <ProjectReference Include="../AgentFrameworkBestPractices.Projects/AgentFrameworkBestPractices.Projects.csproj" />
     <ProjectReference Include="../AgentFrameworkBestPractices.RAG/AgentFrameworkBestPractices.RAG.csproj" />
     <ProjectReference Include="..\AgentFrameworkBestPractices.AgentAsFunctionTool\AgentFrameworkBestPractices.AgentAsFunctionTool.csproj" />
@@ -75,5 +76,13 @@
     <ProjectReference Include="..\AgentFrameworkBestPractices.Prompt\AgentFrameworkBestPractices.Prompt.csproj" />
     <ProjectReference Include="..\AgentFrameworkBestPractices.Workflows\AgentFrameworkBestPractices.Workflows.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="..\AgentFrameworkBestPractices.RAG\contoso-outdoors-knowledge-base.md">
+      <Link>contoso-outdoors-knowledge-base.md</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 
 </Project>

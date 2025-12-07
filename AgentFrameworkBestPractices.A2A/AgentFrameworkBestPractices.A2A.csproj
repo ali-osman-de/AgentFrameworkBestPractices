@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Extensions/" />
+    <Folder Include="Interfaces/" />
+    <Folder Include="Services/" />
+  </ItemGroup>
+
+  <ItemGroup>
+      <PackageReference Include="Microsoft.Agents.AI.A2A" Version="1.0.0-preview.251204.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../AgentFrameworkBestPractices.Common/AgentFrameworkBestPractices.Common.csproj" />
+  </ItemGroup>
+
+</Project>

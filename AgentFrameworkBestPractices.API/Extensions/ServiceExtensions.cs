@@ -11,6 +11,7 @@ using AgentFrameworkBestPractices.Projects.ToDoManagerApp.Extensions;
 using AgentFrameworkBestPractices.Projects.ToDoManagerApp.Data;
 using Microsoft.EntityFrameworkCore;
 using AgentFrameworkBestPractices.RAG.Extensions;
+using AgentFrameworkBestPractices.A2A.Extensions;
 
 namespace AgentFrameworkBestPractices.API.Extensions;
 
@@ -29,5 +30,6 @@ public static class ServiceExtensions
         services.AddWorkflowService();
         services.AddToDoServiceExtension(configuration);
         services.AddRagServiceExtensions();
+        services.AddA2AServices();
     }
 }
