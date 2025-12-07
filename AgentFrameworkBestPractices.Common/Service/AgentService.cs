@@ -1,12 +1,14 @@
 ﻿using System.ClientModel;
 using AgentFrameworkBestPractices.Common.Interface;
 using Microsoft.Agents.AI;
+using Microsoft.Agents.AI.Data;
 using Microsoft.Extensions.AI;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.VectorData;
+using Microsoft.SemanticKernel.Connectors.Qdrant;
 using OpenAI;
 using OpenAI.Files;
 using OpenAI.VectorStores;
+using Qdrant.Client;
 
 namespace AgentFrameworkBestPractices.Common.Service;
 
@@ -63,5 +65,34 @@ public class AgentService : IAgentService
         return vectorStoreCreate;
     }
     #pragma warning restore OPENAI001
+    public OpenAIClient CreateOpenAIClient()
+    {
+        OpenAIClient openAIClient = new(_configuration["Agent:ApiKey"]);
+        return openAIClient;
+    }
+    public Task<QdrantVectorStore> CreateEmbeddingClientWithQdrant(QdrantClient client, bool ownsClientOptions, OpenAIClient openAIClient)
+    {
+        var vectorStore = new QdrantVectorStore(client, ownsClient: ownsClientOptions, new()
+        {
+            EmbeddingGenerator = openAIClient.GetEmbeddingClient(_configuration["Agent:EmbeddingModel"]).AsIEmbeddingGenerator()
+        });
 
+        return Task.FromResult(vectorStore);
+    }
+
+    public AIAgent CreateRagAgent(OpenAIClient openAIClient, string model, string instructions, string name, string descriptions, List<AITool>? agentTools, TextSearchProviderOptions textSearchOptions, Func<string, CancellationToken, Task<IEnumerable<TextSearchProvider.TextSearchResult>>> SearchAdapter)
+    {
+        var aiAgent = openAIClient.GetChatClient(model)
+                      .CreateAIAgent(
+                          new ChatClientAgentOptions(
+                              instructions: instructions,
+                              name: name,
+                              description: descriptions,
+                              tools: agentTools)
+                              {
+                              AIContextProviderFactory = ctx => new TextSearchProvider(SearchAdapter, ctx.SerializedState, ctx.JsonSerializerOptions, textSearchOptions)
+                              });
+
+        return aiAgent;
+    }
 }

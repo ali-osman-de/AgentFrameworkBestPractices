@@ -27,5 +27,11 @@ namespace AgentFrameworkBestPractices.API.Controllers
             var result = await _ragService.RagChat(message);
             return Ok(result);
         }
+
+        public async Task<IActionResult> RagQdrantChat(string message)
+        {
+            var result = await _ragService.RagChatWithQdrant(message);
+            return Ok(result);
+        }
     }
 }
